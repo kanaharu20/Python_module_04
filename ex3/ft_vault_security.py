@@ -27,13 +27,10 @@ def secure_archive(
 if __name__ == "__main__":
     print("=== Cyber Archives Security ===\n")
 
-    print(f"{secure_archive("/etc/master.passwd", "read", "")}\n")
+    print(f"{secure_archive('/etc/master.passwd', 'read', '')}\n")
 
-    print(f"{secure_archive("foo", "read", "")}\n")
+    print(f'{secure_archive("foo", "read", "")}\n')
 
-    print(f"{secure_archive("ancient_fragment.txt", "read", "")}\n")
+    print(f'{secure_archive("ancient_fragment.txt", "read", "")}\n')
 
-    print(f"{secure_archive(
-        "ancient_fragment.txt",
-        "write", "Hello world 42tokyo!!"
-    )}")
+    print(f'{secure_archive("ancient_fragment.txt", "write", "Hello world")}')
