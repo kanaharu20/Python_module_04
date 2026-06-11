@@ -7,10 +7,10 @@ def main() -> None:
     args: list[str] = sys.argv
 
     if len(args) != 2:
-        print("Usage: ft_ancient_text.py <file>\n")
+        print("Usage: ft_archive_creation.py <file>\n")
         return
 
-    print("=== Cyber Archives Recovery ===")
+    print("=== Cyber Archives Recovery & Preservation ===")
     print(f"Accessing file '{args[1]}'")
 
     f = None
@@ -44,11 +44,12 @@ def main() -> None:
         print("---")
         file_to_save: str = input("Enter new file name (or empty): ")
         if file_to_save == "":
-            print("Not saving data")
+            print("Not saving data.")
         else:
             print(f"Saving data to '{file_to_save}'")
             f_w = open(file_to_save, "w")
             f_w.write(new_content)
+            print(f"Data saved in file '{file_to_save}'.")
     except Exception as e:
         print(f"Error opening file '{args[1]}': {e}")
     finally:

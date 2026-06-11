@@ -2,7 +2,7 @@
 
 
 def secure_archive(
-        file_name: str, option: str, content: str
+        file_name: str, option: str = "read", content: str = ""
         ) -> tuple[bool, str]:
     try:
         if option == "read":
@@ -18,8 +18,14 @@ def secure_archive(
                 )
                 file.write(content)
                 return (True, 'Content successfully written to file')
-    except (FileNotFoundError, PermissionError) as e:
+    except FileNotFoundError as e:
         print("Using 'secure_archive' to read from a nonexistent file:")
+        return (False, f"{e}")
+    except PermissionError as e:
+        print("Using 'secure_archive' to read from an inaccessible file:")
+        return (False, f"{e}")
+    except OSError as e:
+        print("Using 'secure_archive' encountered an error:")
         return (False, f"{e}")
     return (False, "Invalid option")
 
@@ -27,9 +33,9 @@ def secure_archive(
 if __name__ == "__main__":
     print("=== Cyber Archives Security ===\n")
 
-    print(f"{secure_archive('/etc/master.passwd', 'read', '')}\n")
-
     print(f'{secure_archive("foo", "read", "")}\n')
+
+    print(f"{secure_archive('/etc/shadow', 'read', '')}\n")
 
     print(f'{secure_archive("ancient_fragment.txt", "read", "")}\n')
 

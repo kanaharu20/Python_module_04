@@ -21,7 +21,7 @@ def main() -> None:
         print(f"{content}")
         print("---")
     except Exception as e:
-        print(f"Error opening file 'foo': {e}")
+        print(f"Error opening file '{args[1]}': {e}")
     finally:
         if f is not None:
             f.close()

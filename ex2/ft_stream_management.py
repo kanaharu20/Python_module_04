@@ -10,7 +10,7 @@ def main() -> None:
         sys.stdout.write("Usage: ft_stream_management.py <file>\n")
         return
 
-    sys.stdout.write("=== Cyber Archives Recovery ===\n")
+    sys.stdout.write("=== Cyber Archives Recovery & Preservation ===\n")
     sys.stdout.write(f"Accessing file '{args[1]}'\n")
 
     f = None
@@ -21,7 +21,7 @@ def main() -> None:
         sys.stdout.write(f"{content}\n")
         sys.stdout.write("---\n")
     except Exception as e:
-        sys.stderr.write(f"[STDERR]Error opening file '{args[1]}': {e}\n")
+        sys.stderr.write(f"[STDERR] Error opening file '{args[1]}': {e}\n")
         return
     finally:
         if f is not None:
@@ -33,6 +33,7 @@ def main() -> None:
     f = None
     f_w = None
     new_content: str = ""
+    file_to_save: str = ""
     try:
         f = open(args[1], "r")
         while True:
@@ -47,15 +48,18 @@ def main() -> None:
         sys.stdout.write("---\n")
         sys.stdout.write("Enter new file name (or empty): ")
         sys.stdout.flush()
-        file_to_save: str = sys.stdin.readline().strip()
+        file_to_save = sys.stdin.readline().strip()
         if file_to_save == "":
-            sys.stdout.write("Not saving data\n")
+            sys.stdout.write("Not saving data.\n")
         else:
             sys.stdout.write(f"Saving data to '{file_to_save}'\n")
             f_w = open(file_to_save, "w")
             f_w.write(new_content)
+            sys.stdout.write(f"Data saved in file '{file_to_save}'.\n")
     except Exception as e:
-        sys.stderr.write(f"[STDERR] Error opening file '{args[1]}': {e}\n")
+        error_file = file_to_save if file_to_save else args[1]
+        sys.stderr.write(f"[STDERR] Error opening file '{error_file}': {e}\n")
+        sys.stdout.write("Data not saved.\n")
     finally:
         if f is not None:
             f.close()
